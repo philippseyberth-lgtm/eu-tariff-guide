@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://eutariffguide.com/sitemap.xml
+Sitemap: https://philippseyberth-lgtm.github.io/eu-tariff-guide/sitemap.xml

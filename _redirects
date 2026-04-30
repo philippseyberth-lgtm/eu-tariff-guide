@@ -1,0 +1,5 @@
+# Redirect non-trailing-slash HS code URLs to trailing-slash (canonical form)
+# Cloudflare Pages handles this automatically for directory-style routes
+
+# Future: redirect old domain if we migrate
+# https://old-domain.com/* https://eutariffguide.com/:splat 301
