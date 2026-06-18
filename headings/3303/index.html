@@ -24,17 +24,52 @@ table tr:hover{background:#f8f9ff}
 footer{background:#1a1a2e;color:#adb5bd;padding:24px 0;margin-top:32px;font-size:12px;text-align:center}
 footer a{color:#4cc9f0;text-decoration:none}
 .updated{font-size:11px;color:#999;text-align:right;margin-top:8px}
+
+/* ===== P0 redesign (presentation layer) ===== */
+:root{--p0-ink:#0f1b2d;--p0-muted:#5b6b80;--p0-line:#e3e8ef;--p0-accent:#1b6ef3;--p0-accent-ink:#0b4fc0;--p0-good:#0a8a4a;--p0-good-soft:#e7f6ee;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--p0-ink);}
+.p0-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--p0-line);color:var(--p0-ink);padding:0;font-size:14px}
+.p0-bar{display:flex;align-items:center;gap:14px;height:58px}
+.p0-brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--p0-ink);font-size:17px;letter-spacing:-.2px;text-decoration:none;flex:none}
+.p0-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--p0-accent),#0b4fc0);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:800;flex:none}
+.p0-word{white-space:nowrap}
+.p0-search{position:relative;flex:1 1 auto;max-width:520px}
+.p0-search input{width:100%;font-size:15px;padding:9px 12px 9px 38px;border:1.5px solid var(--p0-line);border-radius:11px;outline:none;background:#f6f8fb;transition:.15s;color:var(--p0-ink)}
+.p0-search input:focus{border-color:var(--p0-accent);background:#fff;box-shadow:0 0 0 4px rgba(27,110,243,.12)}
+.p0-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--p0-muted);font-size:15px;pointer-events:none}
+.p0-results{position:absolute;left:0;right:0;top:calc(100% + 6px);text-align:left;border:1px solid var(--p0-line);border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(16,30,54,.14);overflow:hidden;display:none;max-height:70vh;overflow-y:auto}
+.p0-results.show{display:block}
+.p0-results a{display:flex;gap:12px;align-items:baseline;padding:11px 14px;border-bottom:1px solid var(--p0-line);color:var(--p0-ink);text-decoration:none}
+.p0-results a:last-child{border-bottom:0}
+.p0-results a:hover,.p0-results a:focus{background:#f6f8fb}
+.p0-results .code{font-variant-numeric:tabular-nums;font-weight:700;color:var(--p0-accent-ink);font-size:13px;flex:none}
+.p0-results .desc{color:var(--p0-muted);font-size:13px;line-height:1.35}
+.p0-results .chip{margin-left:auto;font-size:11px;color:var(--p0-muted);background:#f6f8fb;padding:2px 8px;border-radius:6px;flex:none}
+.p0-results .empty{padding:14px;color:var(--p0-muted);font-size:13px}
+.p0-nav{display:flex;gap:16px;align-items:center;font-size:14px;font-weight:500;flex:none}
+.p0-nav a{color:var(--p0-muted);text-decoration:none}
+.p0-nav a:hover{color:var(--p0-ink)}
+.p0-nav .p0-cta{color:#fff;background:var(--p0-accent);padding:7px 14px;border-radius:9px;font-weight:600}
+.p0-nav .p0-cta:hover{background:var(--p0-accent-ink);color:#fff}
+.p0-trust{display:flex;align-items:center;gap:8px;color:var(--p0-good);font-size:12.5px;font-weight:600;padding-top:0;padding-bottom:8px}
+.p0-bar+.p0-trust{margin-top:-4px}
+.p0-dot{width:7px;height:7px;border-radius:50%;background:var(--p0-good);box-shadow:0 0 0 3px var(--p0-good-soft);flex:none}
+.breadcrumb a{color:var(--p0-accent-ink)}
+@media(max-width:640px){.p0-word{display:none}.p0-nav{gap:10px}.p0-nav a:not(.p0-cta){display:none}.p0-trust{font-size:11px}}
+/* ===== end P0 redesign ===== */
 </style>
 </head>
 <body>
-<header>
-<div class="container">
-<nav>
-<span class="brand">EU Tariff Guide</span>
-<a href="/">Home</a>
+<header class="p0-header">
+<div class="container p0-bar">
+<a class="p0-brand" href="/"><span class="p0-mark">€</span><span class="p0-word">EU Tariff Guide</span></a>
+<div class="p0-search"><span class="p0-ico" aria-hidden="true">🔎</span><input id="p0q" type="search" autocomplete="off" spellcheck="false" placeholder="Search 13,981 HS codes or products…" aria-label="Search HS codes"><div id="p0results" class="p0-results" role="listbox"></div></div>
+<nav class="p0-nav">
 <a href="/chapters/">Chapters</a>
+<a class="p0-cta" href="https://try.eutariffguide.com">Calculator</a>
 </nav>
 </div>
+<div class="p0-trust container"><span class="p0-dot" aria-hidden="true"></span>Official EU TARIC data · updated daily · 13,981 codes</div>
 </header>
 <main class="container">
 <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/chapters/">Chapters</a> &rsaquo; <a href="/chapters/33/">Chapter 33</a> &rsaquo; Heading 3303</div>
@@ -47,5 +82,43 @@ footer a{color:#4cc9f0;text-decoration:none}
 <p style="margin-top:8px">Data sourced from EU TARIC database via Swedish Customs (Tullverket). Not legal advice.</p>
 </div>
 </footer>
+
+<script>
+(function(){
+  var q=document.getElementById('p0q'),box=document.getElementById('p0results'),INDEX=null,loading=false;
+  if(!q||!box)return;
+  function load(cb){
+    if(INDEX){cb();return;}
+    if(loading)return;loading=true;
+    fetch('/search-index.json').then(function(r){return r.json();}).then(function(d){INDEX=d;cb();}).catch(function(){loading=false;});
+  }
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function render(items){
+    if(!items.length){box.innerHTML='<div class="empty">No matches. Try an HS code like 6404 or a product like \u201cjacket\u201d.</div>';box.classList.add('show');return;}
+    box.innerHTML=items.map(function(it){
+      return '<a href="/hs/'+it[0]+'/" role="option"><span class="code">'+it[0]+'</span><span class="desc">'+esc(it[1])+'</span><span class="chip">Ch '+it[2]+'</span></a>';
+    }).join('');
+    box.classList.add('show');
+  }
+  function run(term){
+    term=term.trim().toLowerCase();
+    if(!term){box.classList.remove('show');box.innerHTML='';return;}
+    if(!INDEX){load(function(){run(q.value);});return;}
+    var digits=term.replace(/\D/g,'');
+    var out=INDEX.filter(function(it){
+      if(digits&&it[0].indexOf(digits)===0)return true;
+      return it[1].toLowerCase().indexOf(term)!==-1;
+    });
+    out.sort(function(a,b){
+      var ap=digits&&a[0].indexOf(digits)===0?0:1,bp=digits&&b[0].indexOf(digits)===0?0:1;
+      return ap-bp;
+    });
+    render(out.slice(0,12));
+  }
+  q.addEventListener('focus',function(){load(function(){});});
+  q.addEventListener('input',function(e){run(e.target.value);});
+  document.addEventListener('click',function(e){if(!e.target.closest('.p0-search'))box.classList.remove('show');});
+})();
+</script>
 </body>
 </html>
